@@ -1,1 +1,14 @@
-Polar projection of load profile faciliating faster computation while load profiling of large number of users.
+Implement load profiling using polar projection as mentioned in below IEEE Journal:
+
+Mohajeri, Morteza & Ghassemi, Abolfazl & Gulliver, T. Aaron. (2020). 
+Fast Big Data Analytics for Smart Meter Data. IEEE Open Journal of the Communications Society. 10.1109/OJCOMS.2020.3038590. 
+
+Abstract:
+-) A polar projection-based algorithm is proposed to reduce the computational complexity associated with dimension reduction in unsupervised learning. 
+-) This algorithm employs K-means clustering. 
+-) A new distance metric is developed to account for peak consumption in cluster consumer load profiles. 
+-) It is used to cluster the load profiles according to both total and peak consumption.
+-) To accelerate the clustering process, a stochastic-based approach is developed to reduce the search space to find the cluster centers. 
+-) Numerical results are presented which show a significant reduction in computational complexity using both polar-based and stochastic-based clustering compared to conventional approaches. 
+
+
