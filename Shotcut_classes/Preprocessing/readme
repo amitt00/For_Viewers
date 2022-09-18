@@ -1,0 +1,7 @@
+from preprocessing import Featurizer
+data has categorical columns 
+categorical_columns = ["WorkClass","Education","MaritalStatus", "Occupation", "Relationship", 
+                       "Race", "Gender", "NativeCountry"]
+
+pipe = Featurizer(categorical_columns)
+X_train_normalized = pipe.fit_transform(X_train)
