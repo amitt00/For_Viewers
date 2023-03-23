@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 1000px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#dd4b39", "font": {"color": "black"}, "id": "202.3.77.166", "label": "India\n202.3.77.166\n26.4731,80.2407", "shape": "dot", "title": "202.3.77.166", "x": "26.4731", "y": "80.2407"}, {"color": "#0F2401", "font": {"color": "black"}, "id": "34.201.6.138", "label": "United States\n34.201.6.138\n34.201.6.13839.04372,-77.48749", "shape": "dot", "title": "34.201.6.138", "x": "39.04372", "y": "-77.48749"}, {"color": "#142F55", "font": {"color": "black"}, "id": "100.15.69.134", "label": "NotFound\n100.15.69.134\n100.15.69.1340.0,-77.48749", "shape": "dot", "title": "100.15.69.134", "x": "0.0", "y": "-77.48749"}, {"color": "#1BD6F0", "font": {"color": "black"}, "id": "78.46.88.115", "label": "Germany\n78.46.88.115\n78.46.88.11550.47788,12.37129", "shape": "dot", "title": "78.46.88.115", "x": "50.47788", "y": "12.37129"}, {"color": "#0935B4", "font": {"color": "black"}, "id": "15.235.145.171", "label": "Singapore\n15.235.145.171\n15.235.145.1711.28967,103.85007", "shape": "dot", "title": "15.235.145.171", "x": "1.28967", "y": "103.85007"}, {"color": "#1BD6F0", "font": {"color": "black"}, "id": "168.119.32.85", "label": "Germany\n168.119.32.85\n168.119.32.8549.01513,12.10161", "shape": "dot", "title": "168.119.32.85", "x": "49.01513", "y": "12.10161"}, {"color": "#1973CA", "font": {"color": "black"}, "id": "65.108.130.119", "label": "Finland\n65.108.130.119\n65.108.130.11960.16952,24.93545", "shape": "dot", "title": "65.108.130.119", "x": "60.16952", "y": "24.93545"}, {"color": "#1BD6F0", "font": {"color": "black"}, "id": "142.132.151.227", "label": "Germany\n142.132.151.227\n142.132.151.22751.22172,6.77616", "shape": "dot", "title": "142.132.151.227", "x": "51.22172", "y": "6.77616"}, {"color": "#08024C", "font": {"color": "black"}, "id": "185.53.22.23", "label": "Russian Federation\n185.53.22.23\n185.53.22.2359.93863,30.31413", "shape": "dot", "title": "185.53.22.23", "x": "59.93863", "y": "30.31413"}, {"color": "#1BD6F0", "font": {"color": "black"}, "id": "194.35.120.232", "label": "Germany\n194.35.120.232\n194.35.120.23251.22172,6.77616", "shape": "dot", "title": "194.35.120.232", "x": "51.22172", "y": "6.77616"}, {"color": "#0F2401", "font": {"color": "black"}, "id": "3.216.9.174", "label": "United States\n3.216.9.174\n3.216.9.17439.04372,-77.48749", "shape": "dot", "title": "3.216.9.174", "x": "39.04372", "y": "-77.48749"}, {"color": "#1BD6F0", "font": {"color": "black"}, "id": "91.65.190.110", "label": "Germany\n91.65.190.110\n91.65.190.11052.4855,13.4392", "shape": "dot", "title": "91.65.190.110", "x": "52.4855", "y": "13.4392"}, {"color": "#1BD6F0", "font": {"color": "black"}, "id": "138.68.88.92", "label": "Germany\n138.68.88.92\n138.68.88.9250.1025,8.6299", "shape": "dot", "title": "138.68.88.92", "x": "50.1025", "y": "8.6299"}, {"color": "#0E8842", "font": {"color": "black"}, "id": "18.134.28.176", "label": "United Kingdom\n18.134.28.176\n18.134.28.17651.50853,-0.12574000000000002", "shape": "dot", "title": "18.134.28.176", "x": "51.50853", "y": "-0.12574000000000002"}, {"color": "#2019E7", "font": {"color": "black"}, "id": "34.92.68.55", "label": "Hong Kong\n34.92.68.55\n34.92.68.5522.27832,114.17469", "shape": "dot", "title": "34.92.68.55", "x": "22.27832", "y": "114.17469"}, {"color": "#187AA8", "font": {"color": "black"}, "id": "115.70.55.56", "label": "Australia\n115.70.55.56\n115.70.55.56-33.69525,150.6974", "shape": "dot", "title": "115.70.55.56", "x": "-33.69525", "y": "150.6974"}, {"color": "#1BD6F0", "font": {"color": "black"}, "id": "159.69.173.52", "label": "Germany\n159.69.173.52\n159.69.173.5251.26667,9.53333", "shape": "dot", "title": "159.69.173.52", "x": "51.26667", "y": "9.53333"}, {"color": "#1973CA", "font": {"color": "black"}, "id": "65.108.98.241", "label": "Finland\n65.108.98.241\n65.108.98.24160.16952,24.93545", "shape": "dot", "title": "65.108.98.241", "x": "60.16952", "y": "24.93545"}, {"color": "#08A1C2", "font": {"color": "black"}, "id": "77.207.78.211", "label": "France\n77.207.78.211\n77.207.78.21148.8763,2.3183", "shape": "dot", "title": "77.207.78.211", "x": "48.8763", "y": "2.3183"}, {"color": "#1BD6F0", "font": {"color": "black"}, "id": "193.108.117.148", "label": "Germany\n193.108.117.148\n193.108.117.14850.11552,8.68417", "shape": "dot", "title": "193.108.117.148", "x": "50.11552", "y": "8.68417"}, {"color": "#1BD6F0", "font": {"color": "black"}, "id": "142.132.156.37", "label": "Germany\n142.132.156.37\n142.132.156.3751.22172,6.77616", "shape": "dot", "title": "142.132.156.37", "x": "51.22172", "y": "6.77616"}, {"color": "#1BD6F0", "font": {"color": "black"}, "id": "164.68.117.223", "label": "Germany\n164.68.117.223\n164.68.117.22349.4075,11.1649", "shape": "dot", "title": "164.68.117.223", "x": "49.4075", "y": "11.1649"}, {"color": "#1BD6F0", "font": {"color": "black"}, "id": "142.132.217.240", "label": "Germany\n142.132.217.240\n142.132.217.24050.47788,12.37129", "shape": "dot", "title": "142.132.217.240", "x": "50.47788", "y": "12.37129"}, {"color": "#08A1C2", "font": {"color": "black"}, "id": "5.135.141.146", "label": "France\n5.135.141.146\n5.135.141.14648.85341,2.3487999999999998", "shape": "dot", "title": "5.135.141.146", "x": "48.85341", "y": "2.3487999999999998"}, {"color": "#08024C", "font": {"color": "black"}, "id": "95.143.184.195", "label": "Russian Federation\n95.143.184.195\n95.143.184.19559.70777,30.44543", "shape": "dot", "title": "95.143.184.195", "x": "59.70777", "y": "30.44543"}, {"color": "#1973CA", "font": {"color": "black"}, "id": "65.108.51.243", "label": "Finland\n65.108.51.243\n65.108.51.24360.16952,24.93545", "shape": "dot", "title": "65.108.51.243", "x": "60.16952", "y": "24.93545"}, {"color": "#1BD6F0", "font": {"color": "black"}, "id": "37.120.18.18", "label": "Germany\n37.120.18.18\n37.120.18.1852.5391,13.565", "shape": "dot", "title": "37.120.18.18", "x": "52.5391", "y": "13.565"}, {"color": "#1BD6F0", "font": {"color": "black"}, "id": "157.90.176.97", "label": "Germany\n157.90.176.97\n157.90.176.9752.52437,13.41053", "shape": "dot", "title": "157.90.176.97", "x": "52.52437", "y": "13.41053"}, {"color": "#1973CA", "font": {"color": "black"}, "id": "65.108.242.144", "label": "Finland\n65.108.242.144\n65.108.242.14460.16952,24.93545", "shape": "dot", "title": "65.108.242.144", "x": "60.16952", "y": "24.93545"}, {"color": "#0F2401", "font": {"color": "black"}, "id": "44.200.159.54", "label": "United States\n44.200.159.54\n44.200.159.5439.04372,-77.48749", "shape": "dot", "title": "44.200.159.54", "x": "39.04372", "y": "-77.48749"}, {"color": "#026B13", "font": {"color": "black"}, "id": "153.127.19.231", "label": "Japan\n153.127.19.231\n153.127.19.23135.6895,139.69171", "shape": "dot", "title": "153.127.19.231", "x": "35.6895", "y": "139.69171"}, {"color": "#1BD6F0", "font": {"color": "black"}, "id": "46.4.10.187", "label": "Germany\n46.4.10.187\n46.4.10.18752.52437,13.41053", "shape": "dot", "title": "46.4.10.187", "x": "52.52437", "y": "13.41053"}, {"color": "#1973CA", "font": {"color": "black"}, "id": "65.108.193.245", "label": "Finland\n65.108.193.245\n65.108.193.24560.16952,24.93545", "shape": "dot", "title": "65.108.193.245", "x": "60.16952", "y": "24.93545"}, {"color": "#1BD6F0", "font": {"color": "black"}, "id": "34.107.62.76", "label": "Germany\n34.107.62.76\n34.107.62.7650.1025,8.6299", "shape": "dot", "title": "34.107.62.76", "x": "50.1025", "y": "8.6299"}, {"color": "#0F2401", "font": {"color": "black"}, "id": "3.237.255.200", "label": "United States\n3.237.255.200\n3.237.255.20039.04372,-77.48749", "shape": "dot", "title": "3.237.255.200", "x": "39.04372", "y": "-77.48749"}, {"color": "#1BD6F0", "font": {"color": "black"}, "id": "142.132.137.17", "label": "Germany\n142.132.137.17\n142.132.137.1751.22172,6.77616", "shape": "dot", "title": "142.132.137.17", "x": "51.22172", "y": "6.77616"}, {"color": "#1BD6F0", "font": {"color": "black"}, "id": "168.119.99.159", "label": "Germany\n168.119.99.159\n168.119.99.15952.52437,13.41053", "shape": "dot", "title": "168.119.99.159", "x": "52.52437", "y": "13.41053"}, {"color": "#0F2401", "font": {"color": "black"}, "id": "169.197.141.33", "label": "United States\n169.197.141.33\n169.197.141.3340.7484,-73.9967", "shape": "dot", "title": "169.197.141.33", "x": "40.7484", "y": "-73.9967"}, {"color": "#1BD6F0", "font": {"color": "black"}, "id": "62.171.144.70", "label": "Germany\n62.171.144.70\n62.171.144.7051.22172,6.77616", "shape": "dot", "title": "62.171.144.70", "x": "51.22172", "y": "6.77616"}]);
+                  edges = new vis.DataSet([{"from": "202.3.77.166", "title": "TxRecieved:2023-01-26 21:51:03:69 \nTxHash:0x3c6e1f735714ccec7b3aacdfa0bd7096e84d8b3cf1c1c08ea0e75bd7765ad3e9\n", "to": "34.201.6.138", "value": "2023-01-26 21:51:03:69 "}, {"from": "202.3.77.166", "title": "TxRecieved:2023-01-26 21:51:03:69 \nTxHash:0x3c6e1f735714ccec7b3aacdfa0bd7096e84d8b3cf1c1c08ea0e75bd7765ad3e9\n", "to": "100.15.69.134", "value": "2023-01-26 21:51:03:69 "}, {"from": "202.3.77.166", "title": "TxRecieved:2023-01-26 21:51:34:77 \nTxHash:0xf643e0cee700f5ba9c1cc546aa198746dab40b1be34b836d085e6c9498ac0a96\n", "to": "78.46.88.115", "value": "2023-01-26 21:51:34:77 "}, {"from": "202.3.77.166", "title": "TxRecieved:2023-01-26 21:51:34:77 \nTxHash:0xf643e0cee700f5ba9c1cc546aa198746dab40b1be34b836d085e6c9498ac0a96\n", "to": "15.235.145.171", "value": "2023-01-26 21:51:34:77 "}, {"from": "202.3.77.166", "title": "TxRecieved:2023-01-26 22:04:43:71 \nTxHash:0x79fbec923f6bcabd8e2f7de19d3cb782be091ad5068fb01d58504eb664427e19\n", "to": "168.119.32.85", "value": "2023-01-26 22:04:43:71 "}, {"from": "202.3.77.166", "title": "TxRecieved:2023-01-26 22:04:43:71 \nTxHash:0x79fbec923f6bcabd8e2f7de19d3cb782be091ad5068fb01d58504eb664427e19\n", "to": "65.108.130.119", "value": "2023-01-26 22:04:43:71 "}, {"from": "202.3.77.166", "title": "TxRecieved:2023-01-26 22:18:23:44 \nTxHash:0x9803e63265acef4cf0d2e199a1f7dd8fcee5ec736f99196e0149a97361275cf1\n", "to": "142.132.151.227", "value": "2023-01-26 22:18:23:44 "}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "185.53.22.23", "value": "2023-01-20 07:07:26.796000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "194.35.120.232", "value": "2023-01-20 07:07:26.796000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "3.216.9.174", "value": "2023-01-20 07:07:26.796000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "91.65.190.110", "value": "2023-01-20 07:07:26.796000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "138.68.88.92", "value": "2023-01-20 07:07:26.796000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "18.134.28.176", "value": "2023-01-20 07:07:26.796000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "34.92.68.55", "value": "2023-01-20 07:07:26.796000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "115.70.55.56", "value": "2023-01-20 07:07:26.796000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "159.69.173.52", "value": "2023-01-20 07:07:26.796000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "65.108.98.241", "value": "2023-01-20 07:07:26.796000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "77.207.78.211", "value": "2023-01-20 07:07:26.796000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "193.108.117.148", "value": "2023-01-20 07:07:26.798000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "142.132.156.37", "value": "2023-01-20 07:07:26.798000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "164.68.117.223", "value": "2023-01-20 07:07:26.798000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "142.132.217.240", "value": "2023-01-20 07:07:26.798000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "5.135.141.146", "value": "2023-01-20 07:40:32.285000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "95.143.184.195", "value": "2023-01-20 07:40:32.285000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "65.108.51.243", "value": "2023-01-20 07:40:32.285000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "37.120.18.18", "value": "2023-01-20 07:40:32.285000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "157.90.176.97", "value": "2023-01-20 07:40:32.285000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "65.108.242.144", "value": "2023-01-20 07:40:32.285000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "44.200.159.54", "value": "2023-01-20 07:40:32.285000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "153.127.19.231", "value": "2023-01-20 07:40:32.285000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "46.4.10.187", "value": "2023-01-20 07:40:32.285000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "65.108.193.245", "value": "2023-01-20 07:40:32.285000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "34.107.62.76", "value": "2023-01-20 07:40:32.285000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "3.237.255.200", "value": "2023-01-20 07:40:32.285000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "142.132.137.17", "value": "2023-01-20 07:40:32.286000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "168.119.99.159", "value": "2023-01-20 07:40:32.286000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "169.197.141.33", "value": "2023-01-20 07:40:32.286000"}, {"from": "142.132.151.227", "title": "Neighbour of 142.132.151.227 on:\n2023-01-20", "to": "62.171.144.70", "value": "2023-01-20 07:40:32.286000"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
