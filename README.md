@@ -13,5 +13,5 @@ Visualisation and dashboard using python dash and plotly
 
 
 
-![Alt Text]([https://github.com/amitt00/Projects/blob/main/Published%20Papers/LiveTransactions.gif)
+![Alt Text](https://github.com/amitt00/Projects/blob/main/Published%20Papers/LiveTransactions.gif)
 ![Alt Text](https://github.com/amitt00/Projects/blob/main/Published%20Papers/network_state_less_active_node.gif)
