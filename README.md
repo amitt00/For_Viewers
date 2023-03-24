@@ -20,4 +20,4 @@ Sample Result of Real time Visualisation and dashboard using python dash and plo
 ![Alt Text](https://github.com/amitt00/Projects/blob/main/Published%20Papers/network_state_over%20month.gif)
 
 ![Alt Text](https://github.com/amitt00/Projects/blob/main/Published%20Papers/dashboard_basic.gif)
-![Alt Text](https://github.com/amitt00/Projects/blob/main/Published%20Papers/NodesOnEthereum.png)
+![Alt Text](https://github.com/amitt00/Projects/blob/main/Published%20Papers/Screenshot%202023-03-24%20054829.png)
