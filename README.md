@@ -1,7 +1,9 @@
 # ML/AI
 
 Completed Projects using Machine Learning, Deep learning and NLP during assignments/freinds assignments/buisness problem and capstones
+
 Forecasting    : [Code and results](https://github.com/amitt00/Load_Forecasting)
+
 Load Profiling : [Code and report ](https://github.com/amitt00/LoadProfiling-PolarProjection)
 
 # VAPT 
