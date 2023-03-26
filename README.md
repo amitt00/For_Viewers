@@ -17,7 +17,7 @@ StyleTransfer(GAN) : [Click here](https://github.com/amitt00/StyleTransfer-CGAN)
 ## VAPT  
 
 You can view my published conference paper :
-[MITM in synchrophasor network](https://github.com/amitt00/Projects/blob/main/Published%20Papers/MITM_in%20synchrophasor%20network_NPSC.pdf)
+[MITM in synchrophasor network](https://github.com/amitt00/Projects/blob/main/Published%20Papers/MITM_in%20synchrophasor%20network_NPSC.pdf) or at https://ieeexplore.ieee.org/abstract/document/10069874
 
 ## Blockchain Forensics::
 
