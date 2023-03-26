@@ -4,7 +4,7 @@
 Sample Result of Real time Visualisation and dashboard using python dash and plotly 
 
 
-### RealTime transaction on ethereum blockchain
+### Monitoring realtime incoming interractions to a node on ethereum blockchain
 ![Alt Text](https://github.com/amitt00/Projects/blob/main/Published%20Papers/LiveTransactions.gif)
 ### Network state of random node (sample data)
 ![Alt Text](https://github.com/amitt00/Projects/blob/main/Published%20Papers/network_state_less_active_node.gif)
