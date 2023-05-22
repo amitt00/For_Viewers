@@ -21,14 +21,6 @@ def log_reader(filename):
         return matches
     except Exception as e:
         print("Error in reading file :",e)
-def function_plot(X,Y,obj,pp):
-    plt.figure()
-    plt.clf()
-    plt.bar(X,Y)
-    plt.title('Report IP '+obj)
-    plt.xlabel('Parameter', fontsize = 13)
-    plt.ylabel('Count', fontsize = 13)
-    pp.savefig()
 
 def virustotal_check(api_key,df=pd.DataFrame()):
         filename='report.json'
