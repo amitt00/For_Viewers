@@ -6,7 +6,7 @@ Forecasting        : [Click here](https://github.com/amitt00/Load_Forecasting)
 
 Load Profiling     : [Click here](https://github.com/amitt00/LoadProfiling-PolarProjection)
 
-Computer Vision    : [Click here](https://github.com/amitt00/Computer-Vision)
+Image data         : [Click here](https://github.com/amitt00/Computer-Vision)
 
 NLP                : [Click here](https://github.com/amitt00/NLP-Ticket-Classification)
 
